@@ -54,7 +54,7 @@ public class User extends BasicModel implements Subject
     // -----VARIABLES-----
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id = -1L;
 
     private String login;
 
@@ -75,15 +75,20 @@ public class User extends BasicModel implements Subject
     private List<UserRole> cachedRoles = null;
 
     // -----CONSTRUCTORS-----
-    public User()
-    {
-	super();
+    public User() {
     }
-    public User(Long id)
-    {
-	this();
 
-	this.id = id;
+    public User(Long id) {
+        this();
+        this.id = id;
+    }
+
+    public User(String email, String password, String firstName, String lastName, UserRole roleLevel) {
+        setEmail(email);
+        setNewPassword(password);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setRoleLevel(roleLevel.getLevel());
     }
 
     // -----GETTERS/SETTERS-----
@@ -199,5 +204,22 @@ public class User extends BasicModel implements Subject
     public String toString()
     {
 	return this.getClass().getSimpleName() + " [id=" + id + ", login=" + login + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!id.equals(user.id)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

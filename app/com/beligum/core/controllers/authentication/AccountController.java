@@ -18,6 +18,7 @@
  *******************************************************************************/
 package com.beligum.core.controllers.authentication;
 
+import play.Logger;
 import play.Play;
 import play.api.templates.Html;
 import play.data.Form;
@@ -61,6 +62,9 @@ public class AccountController extends Controller
 
     public static Result createAdminPassword()
     {
+
+        Logger.info("com.beligum.core.controllers.authentication.AccountController#createAdminPassword");
+
 	Result retVal = ok(com.beligum.core.views.html.account.template.render(com.beligum.core.views.html.account.partial.adminpassword.render(true)));
 	if (!UserRepository.RootExists()) {
 	    String password = Form.form().bindFromRequest().get("password1");

@@ -31,12 +31,12 @@ import javax.persistence.PreUpdate;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import play.db.ebean.Model;
+
 
 import com.beligum.core.utils.DateTimeHelper;
 
 @MappedSuperclass
-public abstract class BasicModel extends Model
+public abstract class BasicModel
 {
     // -----VARIABLES-----
     @Column(name = "created_at")
